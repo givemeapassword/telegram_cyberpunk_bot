@@ -32,17 +32,19 @@ async def names():
         character.add(str(ret[0]))
         ret1.append(ret)
     print(ret1)
-    return ret1[0]
 
 async def info_out(name): #для выписки данных имени
     r = cur.execute('SELECT img,history,weapon FROM menu WHERE name == ?', (str(name))).fetchall()
+    base.commit()
     print(r)
     return r
 
 async def del_obj(name):
-    s = cur.execute('DELETE FROM menu WHERE name == ?', (name))
+    s = cur.execute('DELETE FROM menu WHERE name == ?', (name,))
+    base.commit()
 async def delete_all(message):
     cur.execute('DELETE * FROM menu')
+    base.commit()
     bot.send_message(message.from_user.id,"СОВЕРШЕННА ПОЛНАЯ ЛИКВИДАЦИЯ!!!")
     pass
 async def delete():
