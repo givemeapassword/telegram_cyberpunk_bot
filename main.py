@@ -11,5 +11,4 @@ admin.register_handlers_admin(dp)
 button.register_handler_buttton(dp)
 
 
-
 executor.start_polling(dp, skip_updates=True, on_startup=on_startup)

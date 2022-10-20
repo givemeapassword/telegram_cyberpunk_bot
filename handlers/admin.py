@@ -1,11 +1,15 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
+from aiogram.types import ReplyKeyboardMarkup
 from aiogram import types
 from aiogram.dispatcher import Dispatcher
 from aiogram.dispatcher.filters import Text
 from data_base import sql_db
+from keyboards import keyboard as kb
 
-class FSMAdmin(StatesGroup):
+kb1 = []
+character = ReplyKeyboardMarkup()
+class FSMAdmin(StatesGroup):   #машина состояний
     photo = State()
     name = State()
     history = State()

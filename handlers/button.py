@@ -9,8 +9,10 @@ async def persona(message):
 	await sql_db.sql_read(message)
 #@dp.message_handler(commands=['start'])
 async def start(message):
-	await sql_db.sql_name(message)
-	await bot.send_message(message.chat.id, 'dsdadadada', reply_markup=kb.character)
+	await sql_db.names()
+	await bot.send_message(message.chat.id, 'Здарова,чумба', reply_markup=sql_db.character)
+
+#@dp.message_handler(Text(equals=a
 
 def register_handler_buttton(dp : Dispatcher):
 	dp.register_message_handler(persona, commands=['pers'])
