@@ -2,7 +2,7 @@ import sqlite3 as sq
 from create_bot import bot
 from keyboards import keyboard as kb
 from aiogram.types import KeyboardButton,ReplyKeyboardMarkup
-global kb1
+kb1 = 0
 character = ReplyKeyboardMarkup()
 character.add('a')
 ret1 = []
@@ -34,12 +34,16 @@ async def names():
     print(ret1)
     return ret1
 
-async def info_out(name):
+async def info_out(name): #для выписки данных имени
     r = cur.execute('SELECT img,history,weapon FROM menu WHERE name == ?', (str(name))).fetchall()
+    await bot.send_photo(message.from_user.id, r[0])
     print(r)
     return r
 
-async def delete_all():
+async def del_obj(message):
+async def delete_all(message):
+    cur.execute('DELETE * FROM menu')
+    bot.send_message(message.from_user.id,"СОВЕРШЕННА ПОЛНАЯ ЛИКВИДАЦИЯ!!!")
     pass
 async def delete():
     pass
