@@ -6,8 +6,6 @@ from aiogram.dispatcher import Dispatcher
 from aiogram.dispatcher.filters import Text
 from data_base import sql_db
 
-kb1 = []
-character = ReplyKeyboardMarkup()
 class FSMAdmin(StatesGroup):   #машина состояний
     photo = State()
     name = State()
@@ -26,7 +24,7 @@ async def cancel(message: types.Message, state: FSMContext):
     if current_state is None:
         return
     await state.finish()
-    await message.reply('OK')
+    await message.reply('Прекратим на этом')
 
 #@dp.message_handler(content_types=['photo'],state=FSMAdmin.photo)
 async def load(message: types.Message, state: FSMContext):
