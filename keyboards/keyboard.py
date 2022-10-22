@@ -1,6 +1,9 @@
-from aiogram.types import ReplyKeyboardMarkup,KeyboardButton
-from data_base import sql_db as sql
-#global kb1
-#character = ReplyKeyboardMarkup()
-#for i in kb1:
-    #character.add(i)
+from aiogram.types import ReplyKeyboardMarkup
+character1 = ReplyKeyboardMarkup()
+main_menu = ["Удалить персонажа",
+             "Добавить персонажа",
+             "Посмотреть всех персонажей",
+             "Назад"
+             ]
+for i in main_menu:
+    character1.add(i)

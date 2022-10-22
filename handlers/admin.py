@@ -5,7 +5,6 @@ from aiogram import types
 from aiogram.dispatcher import Dispatcher
 from aiogram.dispatcher.filters import Text
 from data_base import sql_db
-from keyboards import keyboard as kb
 
 kb1 = []
 character = ReplyKeyboardMarkup()

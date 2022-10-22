@@ -1,10 +1,8 @@
 import sqlite3 as sq
+
 from create_bot import bot
-from keyboards import keyboard as kb
-from aiogram.types import KeyboardButton,ReplyKeyboardMarkup
-kb1 = 0
+from aiogram.types import ReplyKeyboardMarkup,ReplyKeyboardRemove
 character = ReplyKeyboardMarkup()
-character.add('a')
 ret1 = []
 def sql_start():
     global base, cur
@@ -21,17 +19,18 @@ async def sql_add_command(state):
     async with state.proxy() as data:
         cur.execute('INSERT INTO menu VALUES (?, ?, ?, ?)', tuple(data.values()))
         base.commit()
-
 async def sql_read(message):
     for ret in cur.execute('SELECT * FROM menu').fetchall():
         await bot.send_photo(message.from_user.id,ret[0],ret[1])
         await bot.send_message(message.from_user.id, ret[2])
         await bot.send_message(message.from_user.id, ret[3])
-async def names():
+async def names(message):
     for ret in cur.execute('SELECT name FROM menu').fetchall():
-        character.add(str(ret[0]))
-        ret1.append(ret)
-    print(ret1)
+        character.insert(ret[0])
+        ret1.append(ret[0])
+    character.add('Назад')
+async def cleans():
+    character.delete()
 
 async def info_out(name): #для выписки данных имени
     r = cur.execute('SELECT img,history,weapon FROM menu WHERE name == ?', (str(name))).fetchall()
@@ -39,14 +38,13 @@ async def info_out(name): #для выписки данных имени
     print(r)
     return r
 
-async def del_obj(name):
-    s = cur.execute('DELETE FROM menu WHERE name == ?', (name,))
+async def del_obj(message):
+    cur.execute('DELETE FROM menu WHERE name == ?', (message.text,))
     base.commit()
+
 async def delete_all(message):
-    cur.execute('DELETE * FROM menu')
+    cur.execute('DELETE FROM menu')
     base.commit()
-    bot.send_message(message.from_user.id,"СОВЕРШЕННА ПОЛНАЯ ЛИКВИДАЦИЯ!!!")
-    pass
-async def delete():
-    pass
+    await bot.send_message(message.from_user.id,"СОВЕРШЕННА ПОЛНАЯ ЛИКВИДАЦИЯ!!!")
+
 
