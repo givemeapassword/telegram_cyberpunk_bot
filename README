@@ -1,0 +1,6 @@
+Добавь метод в класс ReplyKeyboardMarkup в aiogram.types :
+
+def delete(self):
+    self.keyboard.clear()
+    return self
+
