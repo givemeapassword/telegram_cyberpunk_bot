@@ -1,7 +1,7 @@
 import sqlite3 as sq
 
 from create_bot import bot
-from aiogram.types import ReplyKeyboardMarkup,ReplyKeyboardRemove
+from aiogram.types import ReplyKeyboardMarkup
 character = ReplyKeyboardMarkup()
 ret1 = []
 def sql_start():
